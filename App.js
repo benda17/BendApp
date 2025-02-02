@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ClientsDataProvider } from './ClientsDataContext';
 import WelcomeScreen from './app/screens/WelcomeScreen.js';
 import UserScreen from './app/screens/UserScreen.js';
+import DashboardScreen from './app/screens/DashboardScreen.js';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,7 @@ export default function App() {
                 <Stack.Navigator screenOptions={{ headerShown: false }}>
                     <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
                     <Stack.Screen name="UserScreen" component={UserScreen} />
+                    <Stack.Screen name="DashboardScreen" component={DashboardScreen} />
                 </Stack.Navigator>
             </NavigationContainer>
         </ClientsDataProvider>

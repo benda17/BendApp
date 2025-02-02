@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ImageBackground, KeyboardAvoidingView, ScrollView, TouchableWithoutFeedback, Keyboard, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ImageBackground, KeyboardAvoidingView, ScrollView, TouchableWithoutFeedback, Keyboard, Image, Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useClientsData } from '../../ClientsDataContext.js';
 
@@ -15,10 +15,11 @@ function WelcomeScreen() {
         }
 
         try {
-            await loadClientData(email); // Fetch and store data
-            navigation.navigate('UserScreen'); // Navigate after data is loaded
+            await loadClientData(email);
+            navigation.navigate('DashboardScreen'); 
         } catch (error) {
             Alert.alert("שגיאה", "האימייל לא נמצא במערכת.");
+            navigation.navigate('WelcomeScreen');
         }
     };
 
@@ -46,9 +47,13 @@ function WelcomeScreen() {
                                 <TouchableOpacity style={styles.signInButton} onPress={handleSignIn}>
                                     <Text style={styles.signInText}>כניסה</Text>
                                 </TouchableOpacity>
+                                <TouchableOpacity style={styles.signUpButton} onPress={() => Linking.openURL('https://wa.link/nuj0ca')}>
+                                    <Text style={styles.signUpText}>הרשמה לניהול החנויות</Text>
+                                </TouchableOpacity>
                             </View>
                         </ScrollView>
                     </TouchableWithoutFeedback>
+                    <Image style={styles.sign} source={require('../assets/sign.png')}></Image>
                 </View>
             </ImageBackground>
         </KeyboardAvoidingView>
@@ -66,7 +71,15 @@ const styles = StyleSheet.create({
     inputContainer: { width: "90%", alignItems: "center" },
     input: { width: "100%", height: 50, backgroundColor: "grey", borderRadius: 25, paddingHorizontal: 15, fontSize: 16, color: "white", marginBottom: 10, textAlign: 'center' },
     signInButton: { width: "100%", height: 50, backgroundColor: "#007FFD", borderRadius: 25, justifyContent: "center", alignItems: "center" },
+    signUpButton: { marginTop: 15, width: "100%", height: 50, borderWidth: 1, borderColor: "black", backgroundColor: 'white', borderRadius: 25, justifyContent: "center", alignItems: "center" },
     signInText: { fontSize: 18, fontWeight: "bold", color: "white" },
+    signUpText: { fontSize: 18, color: "black" },
+    sign: { 
+        width: 80, // ✅ Adjust to make it smaller
+        height: 80, 
+        resizeMode: 'contain', // ✅ Prevents unwanted stretching
+        transform: [{ rotate: '0deg' }], // ✅ Ensures it’s not rotated sideways
+    },
 });
 
 export default WelcomeScreen;
