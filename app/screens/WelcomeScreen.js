@@ -8,19 +8,14 @@ function WelcomeScreen() {
     const navigation = useNavigation();
     const { loadClientData } = useClientsData();
 
-    const handleSignIn = async () => {
-        if (!email.trim()) {
+    const handleSignIn = async (email) => {
+        const success = await loadClientData(email);
+        if (!success) {
             Alert.alert("טעות", "בבקשה להכניס כתובת מייל");
             return;
         }
 
-        try {
-            await loadClientData(email);
-            navigation.navigate('DashboardScreen'); 
-        } catch (error) {
-            Alert.alert("שגיאה", "האימייל לא נמצא במערכת.");
-            navigation.navigate('WelcomeScreen');
-        }
+        navigation.navigate('DashboardScreen'); 
     };
 
     return (
@@ -44,7 +39,7 @@ function WelcomeScreen() {
                                     keyboardType="email-address"
                                     autoCapitalize="none"
                                 />
-                                <TouchableOpacity style={styles.signInButton} onPress={handleSignIn}>
+                                <TouchableOpacity style={styles.signInButton} onPress={() => handleSignIn(email)}>
                                     <Text style={styles.signInText}>כניסה</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.signUpButton} onPress={() => Linking.openURL('https://wa.link/nuj0ca')}>

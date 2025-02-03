@@ -14,7 +14,9 @@ export const ClientsDataProvider = ({ children }) => {
             const userInfo = await fetchClientSpreadsheetId(userEmail);
             if (!userInfo || !userInfo.spreadsheetId) {
                 console.error(`❌ No spreadsheet ID found for user: ${userEmail}`);
-                throw new Error("User not found or missing spreadsheet ID");
+                setClientData(null);
+                setUserName(null);
+                return false; // ⛔ Prevent user from logging in
             }
 
             setUserName(userInfo.name);
@@ -24,16 +26,20 @@ export const ClientsDataProvider = ({ children }) => {
             const data = await fetchClientData(userInfo.spreadsheetId);
             if (!data) {
                 console.error(`❌ Failed to fetch data for spreadsheet ID: ${userInfo.spreadsheetId}`);
-                throw new Error("Failed to fetch user data");
+                setClientData(null);
+                setUserName(null);
+                return false; // ⛔ Prevent login if data is missing
             }
 
             setClientData(data);
             console.log(`✅ User data loaded successfully!`);
+            return true; // ✅ Successfully logged in
 
         } catch (error) {
             console.error("🚨 Error loading client data:", error.message);
             setClientData(null);
             setUserName(null);
+            return false; // ⛔ Prevent login if error occurs
         }
     };
 
