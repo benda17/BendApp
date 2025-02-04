@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text, ScrollView, Dimensions, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BarChart } from 'react-native-gifted-charts';
-import { useClientsData } from '../../ClientsDataContext.js';
+import { useClientsData } from '../context/ClientsDataContext.js';
 import Carousel from 'react-native-reanimated-carousel';
 
 
@@ -123,8 +123,11 @@ function DashboardScreen(props) {
             </View>
             <Text style={styles.metricExtraText}>Management Cost 30 Days</Text>
             <Text style={styles.metricExtraText}>Profits 30 Days</Text>
-          </MetricCard>
+          </MetricCard>  
         </View>
+        <TouchableOpacity style={styles.signUpButton} onPress={() => Linking.openURL('https://wa.link/nuj0ca')}>
+            <Text style={styles.signUpText}>להורדת פורטפוליו ההשקעה</Text>
+        </TouchableOpacity>  
         <View style={styles.carouselContainer}>
           <Text style={styles.sectionTitle}>נתונים נוספים</Text>
           <Carousel
@@ -138,11 +141,8 @@ function DashboardScreen(props) {
             renderItem={({ item }) => renderCarouselItem({ item })}
           />
         </View>
-        
+
       </ScrollView>
-      <TouchableOpacity style={styles.signUpButton} onPress={() => Linking.openURL('https://wa.link/nuj0ca')}>
-            <Text style={styles.signUpText}>להורדת פורטפוליו ההשקעה</Text>
-      </TouchableOpacity>
     </SafeAreaView>
   );
 }
