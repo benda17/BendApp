@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, ScrollView, Dimensions, Image } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, Dimensions, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BarChart } from 'react-native-gifted-charts';
 import { useClientsData } from '../../ClientsDataContext.js';
@@ -27,19 +27,20 @@ function DashboardScreen(props) {
   const ManagementCost30Days = clientData ? parseCurrency(clientData.ManagementCost30Days) : 0;
   const SumOfProducts = clientData ? Number(clientData.AmountOfProducts) : 0;
   const SumOfHours = clientData ? Number(clientData.TotalHoursWorked) : 0;
+  const SumOfOrders = clientData ? Number(clientData.SumOfOrders) : 0;
 
   // Stacked bar data
   const stackData = [
     {
       stacks: [
-        { value: profitsNum, color: '#34A853' },
+        { value: profitsNum, color: 'blue' },
         { value: Math.max(salesNum - profitsNum, 0), color: '#007FFD', marginBottom: 3 },
       ],
       label: 'P vs S',
     },
     {
       stacks: [
-        { value: ordersNum, color: '#FBBC05' },
+        { value: ordersNum, color: 'blue' },
         { value: Math.max(salesNum - ordersNum, 0), color: '#007FFD', marginBottom: 3 },
       ],
       label: 'O vs S',
@@ -53,9 +54,9 @@ function DashboardScreen(props) {
 
   const carouselData = [
     { title: "כמות המוצרים שהעלנו", content: SumOfProducts },
-    { title: "כמות שעות עבודה כוללת", content:  SumOfHours },
-    { title: "כמות שעות עבודה כוללת", content:  SumOfHours },
-    { title: "כמות שעות עבודה כוללת", content:  SumOfHours },
+    { title: "כמות שעות העבודה בחנות", content:  SumOfHours },
+    { title: "סך כל המכירות שעשינו בחנות", content:  SumOfOrders, },
+    { title: "סך כספי כלל המכירות", content:  profitsNum },
   ];
 
   // Render Each Slide in the Carousel
@@ -67,7 +68,7 @@ function DashboardScreen(props) {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }} edges={['top', 'bottom', 'left', 'right']}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff'}} edges={['top', 'bottom', 'left', 'right']}>
       <ScrollView contentContainerStyle={styles.container}>
         <Image style={styles.sign} source={require('../assets/sign.png')} />
         <View>
@@ -120,13 +121,12 @@ function DashboardScreen(props) {
                 labelWidth={50}
               />
             </View>
+            <Text style={styles.metricExtraText}>Management Cost 30 Days</Text>
+            <Text style={styles.metricExtraText}>Profits 30 Days</Text>
           </MetricCard>
         </View>
-        <View style={styles.metricContainer}>
-          <MetricCard title={"סך הרווחים שלך"} value={clientData.SumOfProfits} />
-        </View>
         <View style={styles.carouselContainer}>
-          <Text style={styles.sectionTitle}>📊 נתונים נוספים</Text>
+          <Text style={styles.sectionTitle}>נתונים נוספים</Text>
           <Carousel
             loop
             width={screenWidth * 0.9} 
@@ -138,7 +138,11 @@ function DashboardScreen(props) {
             renderItem={({ item }) => renderCarouselItem({ item })}
           />
         </View>
+        
       </ScrollView>
+      <TouchableOpacity style={styles.signUpButton} onPress={() => Linking.openURL('https://wa.link/nuj0ca')}>
+            <Text style={styles.signUpText}>להורדת פורטפוליו ההשקעה</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -231,6 +235,11 @@ const styles = StyleSheet.create({
   carouselContainer: {
     marginVertical: 30,
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 2,
+    elevation: 5,
   },
   sectionTitle: {
     fontSize: 22,
@@ -263,6 +272,9 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     transform: [{ rotate: '0deg' }],
   },
+  signUpButton: { marginTop: 10, width: "90%", height: 50, borderWidth: 1, borderColor: "black", backgroundColor: 'white', borderRadius: 25, alignSelf: 'center', justifyContent: "center", alignItems: "center" },
+  signInText: { fontSize: 18, fontWeight: "bold", color: "white" },
+  signUpText: { fontSize: 18, color: "black" },
 });
 
 export default DashboardScreen;
