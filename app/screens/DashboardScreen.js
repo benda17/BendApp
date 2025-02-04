@@ -48,8 +48,8 @@ function DashboardScreen(props) {
   ];
 
   const barData = [
-    { value: ManagementCost30Days, label: 'MNG Cost', frontColor: '#D9534F' },
-    { value: ProfitsPast30Days, label: 'Profits', frontColor: '#5CB85C' },
+    { value: ManagementCost30Days, label: 'MNG Cost', frontColor: 'blue' },
+    { value: ProfitsPast30Days, label: 'Profits', frontColor: '#007ffd' },
   ];
 
   const carouselData = [
