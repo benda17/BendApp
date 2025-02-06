@@ -66,10 +66,11 @@ export default function App() {
     <ClientsDataProvider>
       <NavigationContainer>
         <Tab.Navigator
+          initialRouteName="WelcomeScreen"  // Set WelcomeScreen as the initial route
           screenOptions={{ headerShown: false }}
           tabBar={(props) => <HiddenTabBar {...props} />}
         >
-
+          <Tab.Screen name="WelcomeScreen" component={WelcomeScreen} />
           <Tab.Screen name="UserScreen" component={UserScreen} />
           <Tab.Screen name="Dashboard" component={DashboardScreen} />
         </Tab.Navigator>

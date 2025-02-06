@@ -41,7 +41,7 @@ export const fetchClientSpreadsheetId = async (userEmail) => {
 
 // Fetch client data from their personal Google Sheet
 export const fetchClientData = async (spreadsheetId) => {
-  const RANGE = 'MANAGEDBYBENDA!A:M'; // Fetch columns A to M
+  const RANGE = 'MANAGEDBYBENDA!A:M';
 
   try {
     const response = await fetch(
@@ -51,9 +51,8 @@ export const fetchClientData = async (spreadsheetId) => {
 
     if (!data.values || data.values.length < 2) throw new Error("No valid data found");
 
-    const values = data.values[1]; // Second row contains the data
+    const values = data.values[1];
 
-    // Convert Google Sheets Date Number to Readable Date
     const convertGoogleSheetsDate = (serial) => {
       if (!serial || isNaN(serial)) return "N/A";
       const utcDays = Math.floor(serial);
@@ -62,7 +61,6 @@ export const fetchClientData = async (spreadsheetId) => {
       return new Date(excelEpoch + milliseconds).toLocaleDateString();
     };
 
-    // Format numbers as USD currency without decimals
     const formatCurrency = (value) => {
       if (!value || isNaN(value)) return "$0";
       return "$" + new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(Math.round(value));

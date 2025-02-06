@@ -81,16 +81,16 @@ function UserScreen() {
         <Animated.View style={[styles.expandedContainer, { height: animation.interpolate({ inputRange: [0, 1], outputRange: [0, 240] }) }]}>
           {expanded && (
             <View>
-              <TouchableOpacity style={styles.paymentButton}>
+              <TouchableOpacity style={styles.paymentButton} onPress={() => Linking.openURL('insert payment credit')}>
                 <Text style={styles.paymentText}>לתשלום באשראי</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.paymentButton}>
+              <TouchableOpacity style={styles.paymentButton}  onPress={() => Linking.openURL('insert payment bank transfer')}>
                 <Text style={styles.paymentText}>לתשלום בהעברה בנקאית</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.paymentButton}>
+              <TouchableOpacity style={styles.paymentButton} onPress={() => Linking.openURL('insert payment payoneer')}>
                 <Text style={styles.paymentText}>לתשלום בפיוניר</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.paymentButton}>
+              <TouchableOpacity style={styles.paymentButton} onPress={() => Linking.openURL('insert personal whatsapp chat')}>
                 <Text style={styles.paymentText}>לשיחה אישית</Text>
               </TouchableOpacity>
             </View>
