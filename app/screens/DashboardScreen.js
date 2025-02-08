@@ -92,6 +92,11 @@ function DashboardScreen(props) {
                 noOfSections={4}
                 stackData={stackData}
                 xAxisLabelsHeight={50}
+                yAxisColor={'#fff'}
+                xAxisColor={'#fff'}
+                yAxisTextStyle={{ color: '#007ffd', fontSize: 12 }}
+                xAxisTextStyle={{ color: '#007ffd', fontSize: 12 }}
+                xAxisLabelTextStyle={{ color: '#007ffd', fontSize: 12 }}
               />
             </View>
             <Text style={styles.metricExtraText}>Profits out of Sales</Text>
@@ -115,10 +120,11 @@ function DashboardScreen(props) {
                 barBorderRadius={8}
                 data={barData}
                 spacing={45} // Add spacing between bars
-                xAxisColor={'#ccc'}
-                yAxisColor={'#ccc'}
+                xAxisColor={'#fff'}
+                yAxisColor={'#fff'}
                 yAxisTextStyle={{ color: '#007ffd', fontSize: 12 }}
-                labelWidth={50}
+                xAxisTextStyle={{ color: '#007ffd', fontSize: 12 }}
+                xAxisLabelTextStyle={{ color: '#007ffd', fontSize: 12 }}
               />
             </View>
             <Text style={styles.metricExtraText}>Management Cost 30 Days</Text>
@@ -187,7 +193,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 10,
     marginTop: 10,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    color: '#fff',
   },
   metricContainer: {
     marginVertical: 10,
@@ -198,7 +205,7 @@ const styles = StyleSheet.create({
     width: '90%',
     borderRadius: 12,
     marginBottom: 15,
-    backgroundColor: '#fff',
+    backgroundColor: '#212121',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
@@ -214,7 +221,7 @@ const styles = StyleSheet.create({
   metricTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#444',
+    color: '#fff',
     textAlign: 'center',
     marginBottom: 5,
   },
@@ -228,7 +235,7 @@ const styles = StyleSheet.create({
   metricExtraText: {
     fontSize: 16,
     fontWeight: '500',
-    color: '#444',
+    color: '#fff',
     textAlign: 'center',
     marginTop: 5,
   },
@@ -245,7 +252,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#333',
+    color: '#212121',
   },
   carouselItem: {
     backgroundColor: '#007FFD',

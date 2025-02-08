@@ -20,18 +20,17 @@ function WelcomeScreen() {
       return;
     }
 
-    navigation.navigate('UserScreen');
-  };
+    navigation.replace('Main', { screen: 'UserScreen', params: { email: email.trim() } });  };
 
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.background}>
-      <ImageBackground source={require('./t.jpg')} style={styles.backgroundImage} resizeMode="cover">
+      <ImageBackground source={require('../assets/backgroundwhite.png')} style={styles.backgroundImage} resizeMode="cover">
         <View style={styles.overlay}>
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
               <View style={styles.logoContainer}>
-                <Image style={styles.logo} source={require('../assets/logo.png')} />
-                <Text style={styles.tagline}>E-commerce Management to the Next Level</Text>
+                <Image style={styles.logo} source={require('../assets/sign.png')} />
+                <Text style={styles.tagline}>לוקחים את עולם האי-קומרס לגבהים חדשים.</Text>
               </View>
 
               <View style={styles.inputContainer}>
@@ -62,12 +61,12 @@ function WelcomeScreen() {
 const styles = StyleSheet.create({
   background: { flex: 1 },
   backgroundImage: { flex: 1, width: "100%", height: "100%" },
-  overlay: { flex: 1, width: "100%", height: "100%", backgroundColor: "rgba(255, 255, 255, 0.9)", justifyContent: "center", alignItems: "center" },
+  overlay: { flex: 1, width: "100%", height: "100%", justifyContent: "center", alignItems: "center" },
   container: { flexGrow: 1, justifyContent: "center", alignItems: "center" },
   logoContainer: { alignItems: "center", marginBottom: 20 },
   logo: { width: 200, height: 100, marginBottom: 10 },
   tagline: { fontSize: 16, fontWeight: "600", color: "#000", textAlign: "center" },
-  inputContainer: { width: "90%", alignItems: "center" },
+  inputContainer: { width: "100%", alignItems: "center" },
   input: { width: "100%", height: 50, backgroundColor: "grey", borderRadius: 25, paddingHorizontal: 15, fontSize: 16, color: "white", marginBottom: 10, textAlign: 'center' },
   signInButton: { width: "100%", height: 50, backgroundColor: "#007FFD", borderRadius: 25, justifyContent: "center", alignItems: "center" },
   signUpButton: { marginTop: 15, width: "100%", height: 50, borderWidth: 1, borderColor: "black", backgroundColor: 'white', borderRadius: 25, justifyContent: "center", alignItems: "center" },

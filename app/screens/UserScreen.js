@@ -30,7 +30,7 @@ function UserScreen() {
     await Notifications.requestPermissionsAsync();
     await Notifications.scheduleNotificationAsync({
       content: {
-        title: "⏳ שעות נותרות נמוכות!",
+        title: "נותרו מספר שעות בודדות.",
         body: `נותרו לך רק ${remainingHours} שעות. מומלץ לחדש את החבילה שלך.`,
       },
       trigger: null,
@@ -41,14 +41,14 @@ function UserScreen() {
   const toggleExpansion = () => {
     setExpanded(!expanded);
     Animated.timing(animation, {
-      toValue: expanded ? 0 : 1, // Expand when toggled
+      toValue: expanded ? 0 : 1,
       duration: 300, 
       useNativeDriver: false, 
     }).start();
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1}}>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.logoContainer}>
           <Image style={styles.logo} source={require('../assets/logo.png')} />
@@ -69,7 +69,6 @@ function UserScreen() {
           <MetricCard title="תאריך חבילה אחרון" value={clientData.DatePurchased} />
         </View>
 
-        {/* Main Button for Expanding */}
         <TouchableOpacity style={styles.signUpButton} onPress={() => Linking.openURL('https://wa.link/qxiavx')}>
           <Text style={styles.signUpText}>להוספת חנות לניהול</Text>
         </TouchableOpacity>
@@ -77,11 +76,10 @@ function UserScreen() {
           <Text style={styles.signUpText}>לרכישת שעות נוספות</Text>
         </TouchableOpacity>
 
-        {/* Expanding Animated View */}
         <Animated.View style={[styles.expandedContainer, { height: animation.interpolate({ inputRange: [0, 1], outputRange: [0, 240] }) }]}>
           {expanded && (
             <View>
-              <TouchableOpacity style={styles.paymentButton} onPress={() => Linking.openURL('insert payment credit')}>
+              <TouchableOpacity style={styles.paymentButton} onPress={() => Linking.openURL('https://secure.cardcom.solutions/EA/EA5/Dr1iRwLobUmQY3gHJNW2Rw/PaymentSP')}>
                 <Text style={styles.paymentText}>לתשלום באשראי</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.paymentButton}  onPress={() => Linking.openURL('insert payment bank transfer')}>
@@ -185,9 +183,11 @@ const styles = StyleSheet.create({
   metricContainer: { 
     width: '100%', 
     alignItems: 'center', 
+    color: '#fff',
   },
   metricCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#212121',
+    color: '#fff',
     width: '90%',
     padding: 20,
     borderRadius: 12,
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   metricTitle: { 
     fontSize: 20, 
     fontWeight: 'bold', 
-    color: '#444', 
+    color: '#fff', 
     textAlign: 'center', 
   },
   metricValue: { 

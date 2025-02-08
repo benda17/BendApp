@@ -4,15 +4,17 @@
     "slug": "BendApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/icon.png",
+    "icon": "/app/assets/AppLogo.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./app/assets/splash-icon.png",
+      "image": "./app/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
+      "buildIndentifier": "com.bendapp.app",
+      "buildnumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
