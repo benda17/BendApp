@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Linking, Alert, Share, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import * as Sharing from 'expo-sharing';
 
 const PayoneerPaymentScreen = () => {
+  const [uploadedFile, setUploadedFile] = useState(null);
+
   const handleWhatsAppContact = () => {
     const whatsappLink = 'https://wa.link/vw3un6'; // קישור ליצירת קשר בוואטסאפ
     Linking.openURL(whatsappLink);
@@ -27,7 +30,7 @@ const PayoneerPaymentScreen = () => {
       return;
     }
     
-    // Use React Native's built-in Share API to share the selected image
+    // Share the selected image using React Native's built-in Share API
     try {
       await Share.share({
         title: 'Payment Screenshot',

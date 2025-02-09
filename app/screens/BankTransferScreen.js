@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, Alert, Share } from 'react-native';
 import * as DocumentPicker from 'expo-document-picker';
+import * as Sharing from 'expo-sharing';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const BankTransferScreen = () => {
@@ -10,16 +11,25 @@ const BankTransferScreen = () => {
     const result = await DocumentPicker.getDocumentAsync({});
     if (result.type === 'success') {
       setUploadedFile(result);
-      Alert.alert('Success', 'File uploaded successfully!');
+      Alert.alert('מעולה!', 'הקובץ הועלה בהצלחה');
     }
   };
 
-  const handleSendConfirmation = () => {
+  const handleSendConfirmation = async () => {
     if (uploadedFile) {
-      // Logic to send the file (Webhook, Email, WhatsApp API, etc.)
-      Alert.alert('Confirmation Sent', 'Your transfer confirmation has been sent.');
+      try {
+        if (await Sharing.isAvailableAsync()) {
+          await Sharing.shareAsync(uploadedFile.uri, {
+            dialogTitle: 'שיתוף אסמכתא',
+          });
+      } else {
+        Alert.alert('שיתוף לא זמין', 'נכשל בשיתוף הקובץ');
+      }
+    } catch (error) {
+      Alert.alert('שגיאה', 'בבקשה העלה את האישור לפני שליחתו');
+    }
     } else {
-      Alert.alert('Error', 'Please upload the transfer confirmation file first.');
+      Alert.alert('שגיאה', 'אנא העלה קובץ לפני שליחתו');
     }
   };
 
