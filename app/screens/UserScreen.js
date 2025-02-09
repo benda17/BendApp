@@ -4,11 +4,13 @@ import * as Notifications from 'expo-notifications';
 import ProgressBar from 'react-native-progress/Bar';
 import { useClientsData } from '../context/ClientsDataContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
 function UserScreen() {
   const { clientData, userName } = useClientsData();
   const [expanded, setExpanded] = useState(false);
   const animation = useRef(new Animated.Value(0)).current; // Animation reference
+  const navigation = useNavigation();
 
   if (!clientData) {
     return <Text style={styles.loadingText}>טוען נתונים...</Text>;
@@ -82,13 +84,13 @@ function UserScreen() {
               <TouchableOpacity style={styles.paymentButton} onPress={() => Linking.openURL('https://secure.cardcom.solutions/EA/EA5/Dr1iRwLobUmQY3gHJNW2Rw/PaymentSP')}>
                 <Text style={styles.paymentText}>לתשלום באשראי</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.paymentButton}  onPress={() => Linking.openURL('insert payment bank transfer')}>
+              <TouchableOpacity style={styles.paymentButton}  onPress={navigation.navigate('BankTransferScreen')}>
                 <Text style={styles.paymentText}>לתשלום בהעברה בנקאית</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.paymentButton} onPress={() => Linking.openURL('insert payment payoneer')}>
                 <Text style={styles.paymentText}>לתשלום בפיוניר</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.paymentButton} onPress={() => Linking.openURL('insert personal whatsapp chat')}>
+              <TouchableOpacity style={styles.paymentButton} onPress={() => Linking.openURL('https://wa.link/vw3un6')}>
                 <Text style={styles.paymentText}>לשיחה אישית</Text>
               </TouchableOpacity>
             </View>

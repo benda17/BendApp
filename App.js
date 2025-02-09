@@ -7,6 +7,7 @@ import WelcomeScreen from './app/screens/WelcomeScreen';
 import UserScreen from './app/screens/UserScreen';
 import DashboardScreen from './app/screens/DashboardScreen';
 import { ClientsDataProvider } from './app/context/ClientsDataContext';
+import BankTransferScreen from './app/screens/BankTransferScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -40,6 +41,7 @@ function AppNavigator() {
         {/* WelcomeScreen is used only for sign in and is not shown in the tab bar */}
         <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
         <Stack.Screen name="Main" component={MainTabNavigator} />
+        <Stack.Screen name="BankTransferScreen" component={BankTransferScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
