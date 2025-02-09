@@ -84,10 +84,10 @@ function UserScreen() {
               <TouchableOpacity style={styles.paymentButton} onPress={() => Linking.openURL('https://secure.cardcom.solutions/EA/EA5/Dr1iRwLobUmQY3gHJNW2Rw/PaymentSP')}>
                 <Text style={styles.paymentText}>לתשלום באשראי</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.paymentButton}  onPress={navigation.navigate('BankTransferScreen')}>
+              <TouchableOpacity style={styles.paymentButton}  onPress={() => navigation.navigate('BankTransferScreen')}>
                 <Text style={styles.paymentText}>לתשלום בהעברה בנקאית</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.paymentButton} onPress={() => Linking.openURL('insert payment payoneer')}>
+              <TouchableOpacity style={styles.paymentButton} onPress={() => navigation.navigate('PayoneerTransferScreen')}>
                 <Text style={styles.paymentText}>לתשלום בפיוניר</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.paymentButton} onPress={() => Linking.openURL('https://wa.link/vw3un6')}>
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "black",
     backgroundColor: 'white',
-    borderRadius: 25,
+    borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 50,
     backgroundColor: "#007FFD",
-    borderRadius: 25,
+    borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
   },

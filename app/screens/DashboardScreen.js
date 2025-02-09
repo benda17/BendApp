@@ -132,7 +132,7 @@ function DashboardScreen(props) {
           </MetricCard>  
         </View>
         <TouchableOpacity style={styles.signUpButton} onPress={() => Linking.openURL('https://wa.link/nuj0ca')}>
-            <Text style={styles.signUpText}>להורדת פורטפוליו ההשקעה</Text>
+            <Text style={styles.signUpText}>להורדת פורטפוליו ההשקעה (בקרוב...)</Text>
         </TouchableOpacity>  
         <View style={styles.carouselContainer}>
           <Text style={styles.sectionTitle}>נתונים נוספים</Text>
@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     transform: [{ rotate: '0deg' }],
   },
-  signUpButton: { marginTop: 10, width: "90%", height: 50, borderWidth: 1, borderColor: "black", backgroundColor: 'white', borderRadius: 25, alignSelf: 'center', justifyContent: "center", alignItems: "center" },
+  signUpButton: { marginTop: 10, width: "90%", height: 50, borderWidth: 1, borderColor: "black", backgroundColor: 'white', borderRadius: 20, alignSelf: 'center', justifyContent: "center", alignItems: "center" },
   signInText: { fontSize: 18, fontWeight: "bold", color: "white" },
   signUpText: { fontSize: 18, color: "black" },
 });

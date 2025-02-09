@@ -8,6 +8,7 @@ import UserScreen from './app/screens/UserScreen';
 import DashboardScreen from './app/screens/DashboardScreen';
 import { ClientsDataProvider } from './app/context/ClientsDataContext';
 import BankTransferScreen from './app/screens/BankTransferScreen';
+import PayoneerPaymentScreen from './app/screens/PayoneerTransferScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -42,6 +43,7 @@ function AppNavigator() {
         <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
         <Stack.Screen name="Main" component={MainTabNavigator} />
         <Stack.Screen name="BankTransferScreen" component={BankTransferScreen} />
+        <Stack.Screen name="PayoneerTransferScreen" component={PayoneerPaymentScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
