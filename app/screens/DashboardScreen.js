@@ -136,6 +136,7 @@ function DashboardScreen(props) {
         </TouchableOpacity>  
         <View style={styles.carouselContainer}>
           <Text style={styles.sectionTitle}>נתונים נוספים</Text>
+          <Text style={styles.sectionText}>גללו ימינה ושמאלה</Text>
           <Carousel
             loop
             width={screenWidth * 0.9} 
@@ -251,8 +252,14 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 0,
     color: '#212121',
+  },
+  sectionText: {
+    fontSize: 16,
+    color: '#212121',
+    textAlign: 'center',
+    marginBottom: 10,
   },
   carouselItem: {
     backgroundColor: '#007FFD',
@@ -279,7 +286,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     transform: [{ rotate: '0deg' }],
   },
-  signUpButton: { marginTop: 10, width: "90%", height: 50, borderWidth: 1, borderColor: "black", backgroundColor: 'white', borderRadius: 20, alignSelf: 'center', justifyContent: "center", alignItems: "center" },
+  signUpButton: { marginTop: 10, width: "90%", height: 50, borderWidth: 1, borderColor: "black", backgroundColor: 'white', borderRadius: 25, alignSelf: 'center', justifyContent: "center", alignItems: "center" },
   signInText: { fontSize: 18, fontWeight: "bold", color: "white" },
   signUpText: { fontSize: 18, color: "black" },
 });

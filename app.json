@@ -15,7 +15,11 @@
     "ios": {
       "buildIndentifier": "com.bendapp.app",
       "buildnumber": "1.0.0",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bendapp.BendApp",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -25,6 +29,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "aa3e3876-fb62-46b3-bd73-b2409bb806c4"
+      }
     }
   }
 }
