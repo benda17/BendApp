@@ -81,7 +81,7 @@ function UserScreen() {
         <Animated.View style={[styles.expandedContainer, { height: animation.interpolate({ inputRange: [0, 1], outputRange: [0, 240] }) }]}>
           {expanded && (
             <View>
-              <TouchableOpacity style={styles.paymentButton} onPress={() => Linking.openURL('https://secure.cardcom.solutions/EA/EA5/Dr1iRwLobUmQY3gHJNW2Rw/PaymentSP')}>
+              <TouchableOpacity style={styles.paymentButton} onPress={() => Linking.openURL('https://wa.link/vw3un6')}>
                 <Text style={styles.paymentText}>לתשלום באשראי</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.paymentButton}  onPress={() => navigation.navigate('BankTransferScreen')}>

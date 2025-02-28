@@ -4,7 +4,7 @@
     "slug": "BendApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "/app/assets/AppLogo.png",
+    "icon": "app/assets/BENDAPP LOGO.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
