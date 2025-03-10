@@ -74,28 +74,7 @@ function UserScreen() {
         <TouchableOpacity style={styles.signUpButton} onPress={() => Linking.openURL('https://wa.link/qxiavx')}>
           <Text style={styles.signUpText}>להוספת חנות לניהול</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.signUpButton} onPress={toggleExpansion}>
-          <Text style={styles.signUpText}>לרכישת שעות נוספות</Text>
-        </TouchableOpacity>
-
-        <Animated.View style={[styles.expandedContainer, { height: animation.interpolate({ inputRange: [0, 1], outputRange: [0, 240] }) }]}>
-          {expanded && (
-            <View>
-              <TouchableOpacity style={styles.paymentButton} onPress={() => Linking.openURL('https://wa.link/vw3un6')}>
-                <Text style={styles.paymentText}>לתשלום באשראי</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.paymentButton}  onPress={() => navigation.navigate('BankTransferScreen')}>
-                <Text style={styles.paymentText}>לתשלום בהעברה בנקאית</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.paymentButton} onPress={() => navigation.navigate('PayoneerTransferScreen')}>
-                <Text style={styles.paymentText}>לתשלום בפיוניר</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.paymentButton} onPress={() => Linking.openURL('https://wa.link/vw3un6')}>
-                <Text style={styles.paymentText}>לשיחה אישית</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </Animated.View>
+        
         <View style={styles.signContainer}>
           <Image style={styles.sign} source={require('../assets/sign.png')} />
         </View>
