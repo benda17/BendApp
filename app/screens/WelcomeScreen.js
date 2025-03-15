@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ImageBackground, KeyboardAvoidingView, ScrollView, TouchableWithoutFeedback, Keyboard, Image, Linking } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ImageBackground, KeyboardAvoidingView, ScrollView, TouchableWithoutFeedback, Keyboard, Image, Modal } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useClientsData } from '../context/ClientsDataContext';
+import { WebView } from 'react-native-webview';
 
 function WelcomeScreen() {
   const [email, setEmail] = useState('');
+  const [showWebView, setShowWebView] = useState(false);
   const navigation = useNavigation();
   const { loadClientData } = useClientsData();
 
@@ -20,7 +22,8 @@ function WelcomeScreen() {
       return;
     }
 
-    navigation.replace('Main', { screen: 'UserScreen', params: { email: email.trim() } });  };
+    navigation.replace('Main', { screen: 'UserScreen', params: { email: email.trim() } });  
+  };
 
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.background}>
@@ -46,7 +49,7 @@ function WelcomeScreen() {
                 <TouchableOpacity style={styles.signInButton} onPress={handleSignIn}>
                   <Text style={styles.signInText}>כניסה</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.signUpButton} onPress={() => Linking.openURL('https://wa.link/nuj0ca')}>
+                <TouchableOpacity style={styles.signUpButton} onPress={() => setShowWebView(true)}>
                   <Text style={styles.signUpText}>הרשמה לניהול החנויות</Text>
                 </TouchableOpacity>
               </View>
@@ -54,6 +57,16 @@ function WelcomeScreen() {
           </TouchableWithoutFeedback>
         </View>
       </ImageBackground>
+
+      {/* WebView Modal */}
+      <Modal visible={showWebView} animationType="slide">
+        <View style={{ flex: 1 }}>
+          <TouchableOpacity style={styles.closeButton} onPress={() => setShowWebView(false)}>
+            <Text style={styles.closeButtonText}>✖</Text>
+          </TouchableOpacity>
+          <WebView source={{ uri: 'https://wa.link/nuj0ca' }} />
+        </View>
+      </Modal>
     </KeyboardAvoidingView>
   );
 }
@@ -72,12 +85,8 @@ const styles = StyleSheet.create({
   signUpButton: { marginTop: 15, width: "100%", height: 50, borderWidth: 1, borderColor: "black", backgroundColor: 'white', borderRadius: 25, justifyContent: "center", alignItems: "center" },
   signInText: { fontSize: 18, fontWeight: "bold", color: "white" },
   signUpText: { fontSize: 18, color: "black" },
-  sign: { 
-    width: 80,
-    height: 80, 
-    resizeMode: 'contain',
-    transform: [{ rotate: '0deg' }],
-  },
+  closeButton: { position: "absolute", top: 40, right: 20, zIndex: 10, backgroundColor: "#000", padding: 10, borderRadius: 20 },
+  closeButtonText: { color: "#fff", fontSize: 20, fontWeight: "bold" },
 });
 
 export default WelcomeScreen;

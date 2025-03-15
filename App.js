@@ -7,8 +7,6 @@ import WelcomeScreen from './app/screens/WelcomeScreen';
 import UserScreen from './app/screens/UserScreen';
 import DashboardScreen from './app/screens/DashboardScreen';
 import { ClientsDataProvider } from './app/context/ClientsDataContext';
-import BankTransferScreen from './app/screens/BankTransferScreen';
-import PayoneerPaymentScreen from './app/screens/PayoneerTransferScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -17,11 +15,11 @@ function MainTabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        headerShown: false, // Do not show header on each tab screen
+        headerShown: false,
         tabBarIcon: ({ color, size }) => {
           let iconName;
           if (route.name === 'DashboardScreen') {
-            iconName = 'bar-chart'; // Dollar sign icon (or bar-chart as before)
+            iconName = 'bar-chart'; 
           } else if (route.name === 'UserScreen') {
             iconName = 'person';
           }
@@ -39,11 +37,8 @@ function AppNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="WelcomeScreen" screenOptions={{ headerShown: false }}>
-        {/* WelcomeScreen is used only for sign in and is not shown in the tab bar */}
         <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
         <Stack.Screen name="Main" component={MainTabNavigator} />
-        <Stack.Screen name="BankTransferScreen" component={BankTransferScreen} />
-        <Stack.Screen name="PayoneerTransferScreen" component={PayoneerPaymentScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

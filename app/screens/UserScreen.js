@@ -9,37 +9,18 @@ import { useNavigation } from '@react-navigation/native';
 function UserScreen() {
   const { clientData, userName } = useClientsData();
   const [expanded, setExpanded] = useState(false);
-  const animation = useRef(new Animated.Value(0)).current; // Animation reference
+  const animation = useRef(new Animated.Value(0)).current;
   const navigation = useNavigation();
 
   if (!clientData) {
     return <Text style={styles.loadingText}>טוען נתונים...</Text>;
   }
 
-  // Convert values to numbers for progress calculation
   const totalHours = Number(clientData.HoursPurchased) || 0;
   const hoursRemaining = Number(clientData.HoursLeftInBundle) || 0;
   const hoursWorked = totalHours - hoursRemaining;
   const usagePercentage = totalHours > 0 ? hoursWorked / totalHours : 0;
 
-  useEffect(() => {
-    if (hoursRemaining > 0 && hoursRemaining < 5) {
-      sendLowHoursNotification(hoursRemaining);
-    }
-  }, [hoursRemaining]);
-
-  const sendLowHoursNotification = async (remainingHours) => {
-    await Notifications.requestPermissionsAsync();
-    await Notifications.scheduleNotificationAsync({
-      content: {
-        title: "נותרו מספר שעות בודדות.",
-        body: `נותרו לך רק ${remainingHours} שעות. מומלץ לחדש את החבילה שלך.`,
-      },
-      trigger: null,
-    });
-  };
-
-  // Handle Expand Animation
   const toggleExpansion = () => {
     setExpanded(!expanded);
     Animated.timing(animation, {
@@ -70,10 +51,6 @@ function UserScreen() {
         <View style={styles.metricContainer}>
           <MetricCard title="תאריך חבילה אחרון" value={clientData.DatePurchased} />
         </View>
-
-        <TouchableOpacity style={styles.signUpButton} onPress={() => Linking.openURL('https://wa.link/qxiavx')}>
-          <Text style={styles.signUpText}>להוספת חנות לניהול</Text>
-        </TouchableOpacity>
         
         <View style={styles.signContainer}>
           <Image style={styles.sign} source={require('../assets/sign.png')} />
@@ -83,7 +60,7 @@ function UserScreen() {
   );
 }
 
-// Reusable Metric Card Component
+
 const MetricCard = ({ title, value }) => (
   <View style={styles.metricCard}>
     <Text style={styles.metricTitle}>{title}</Text>

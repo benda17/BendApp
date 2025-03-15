@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, ScrollView, Dimensions, Image, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, Dimensions, Image, TouchableOpacity, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BarChart } from 'react-native-gifted-charts';
 import { useClientsData } from '../context/ClientsDataContext.js';
@@ -9,7 +9,7 @@ import Carousel from 'react-native-reanimated-carousel';
 const screenWidth = Dimensions.get('window').width;
 const chartWidth = screenWidth * 0.9 - 40;
 
-// Helper to parse currency strings (e.g. "$1,234") into numbers
+
 const parseCurrency = (value) => {
   if (!value) return 0;
   if (typeof value === 'number') return value;
@@ -19,7 +19,7 @@ const parseCurrency = (value) => {
 function DashboardScreen(props) {
   const { clientData, userName } = useClientsData();
 
-  // Convert formatted values into numbers
+
   const salesNum = clientData ? parseCurrency(clientData.SumOfSales) : 0;
   const profitsNum = clientData ? parseCurrency(clientData.SumOfProfits) : 0;
   const ordersNum = clientData ? Number(clientData.SumOfOrders) : 0;
@@ -29,7 +29,7 @@ function DashboardScreen(props) {
   const SumOfHours = clientData ? Number(clientData.TotalHoursWorked) : 0;
   const SumOfOrders = clientData ? Number(clientData.SumOfOrders) : 0;
 
-  // Stacked bar data
+
   const stackData = [
     {
       stacks: [
@@ -59,7 +59,7 @@ function DashboardScreen(props) {
     { title: "סך כספי כלל המכירות", content:  profitsNum },
   ];
 
-  // Render Each Slide in the Carousel
+
   const renderCarouselItem = ({ item }) => (
     <View style={styles.carouselItem}>
       <Text style={styles.carouselTitle}>{item.title}</Text>
@@ -75,12 +75,12 @@ function DashboardScreen(props) {
           <Text style={styles.welcomeText}>הדאשבורד שלך, {userName}</Text>
         </View>
 
-        {/* Metric Card for overall sales */}
+
         <View style={styles.metricContainer}>
           <MetricCard title={"סך כל המכירות שלך"} value={clientData ? clientData.SumOfSales : 0} />
         </View>
 
-        {/* Metric Card containing the graph and text */}
+
         <View style={styles.metricContainer}>
           <MetricCard title="יחסי מכירות ורווחים">
             <View style={styles.chartContainer}>
@@ -111,7 +111,6 @@ function DashboardScreen(props) {
           <MetricCard title={"נתונים כללים..."} />
         </View>
 
-        {/* Improved Bar Chart Metric Card */}
         <View style={styles.metricContainer}>
           <MetricCard title={"רווחים וניהול - 30 ימים"}>
             <View style={styles.horizontalChartContainer}>
@@ -119,7 +118,7 @@ function DashboardScreen(props) {
                 barWidth={50}
                 barBorderRadius={8}
                 data={barData}
-                spacing={45} // Add spacing between bars
+                spacing={45}
                 xAxisColor={'#fff'}
                 yAxisColor={'#fff'}
                 yAxisTextStyle={{ color: '#007ffd', fontSize: 12 }}
@@ -148,13 +147,12 @@ function DashboardScreen(props) {
             renderItem={({ item }) => renderCarouselItem({ item })}
           />
         </View>
-
       </ScrollView>
     </SafeAreaView>
   );
 }
 
-// MetricCard component with an outer shadow wrapper
+
 const MetricCard = ({ title, value, children }) => (
   <View style={styles.metricCardShadow}>
     <View style={styles.metricCard}>
@@ -179,7 +177,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: 10,
   },
-  // Standard chart container
+
   chartContainer: {
     width: '100%',
     alignItems: 'center',
@@ -187,7 +185,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     marginTop: 10,
   },
-  // Improved styling for horizontal chart
+
   horizontalChartContainer: {
     width: '100%',
     alignItems: 'center',
